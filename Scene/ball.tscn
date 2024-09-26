@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvudjchq0bi3a"]
+[gd_scene load_steps=4 format=3 uid="uid://cvudjchq0bi3a"]
 
+[ext_resource type="Script" path="res://Script/ball.gd" id="1_3can5"]
 [ext_resource type="Texture2D" uid="uid://be81co7k0lmtm" path="res://Assets/ball.png" id="1_3r71h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l4i2v"]
 
 [node name="Ball" type="CharacterBody2D"]
 position = Vector2(577, 326)
+script = ExtResource("1_3can5")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
