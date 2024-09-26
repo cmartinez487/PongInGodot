@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmmwsk8tys463"]
+
+[ext_resource type="PackedScene" uid="uid://dyuxmfiq4tsi3" path="res://Scene/player.tscn" id="1_lmtgw"]
+[ext_resource type="PackedScene" uid="uid://cdiygb0alediu" path="res://Scene/computer.tscn" id="2_uqrly"]
+[ext_resource type="PackedScene" uid="uid://cvudjchq0bi3a" path="res://Scene/ball.tscn" id="3_hqh4a"]
+[ext_resource type="Texture2D" uid="uid://bd7vg623ihx2o" path="res://Assets/wall-horizontal.png" id="4_2udgs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67nxj"]
+size = Vector2(1151, 20)
+
+[node name="Pong" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_lmtgw")]
+position = Vector2(111, 326)
+
+[node name="Computer" parent="." instance=ExtResource("2_uqrly")]
+position = Vector2(1045, 347)
+
+[node name="Ball" parent="." instance=ExtResource("3_hqh4a")]
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="TopWall"]
+position = Vector2(576, 40)
+scale = Vector2(0.968013, 1)
+texture = ExtResource("4_2udgs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(576.5, 40)
+shape = SubResource("RectangleShape2D_67nxj")
+
+[node name="ButtonWall" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonWall"]
+position = Vector2(576, 40)
+scale = Vector2(0.968013, 1)
+texture = ExtResource("4_2udgs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonWall"]
+position = Vector2(576.5, 40)
+shape = SubResource("RectangleShape2D_67nxj")
