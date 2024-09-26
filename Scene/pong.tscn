@@ -1,14 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmmwsk8tys463"]
+[gd_scene load_steps=12 format=3 uid="uid://cmmwsk8tys463"]
 
+[ext_resource type="Script" path="res://Script/pong.gd" id="1_8a7os"]
 [ext_resource type="PackedScene" uid="uid://dyuxmfiq4tsi3" path="res://Scene/player.tscn" id="1_lmtgw"]
 [ext_resource type="PackedScene" uid="uid://cdiygb0alediu" path="res://Scene/computer.tscn" id="2_uqrly"]
 [ext_resource type="PackedScene" uid="uid://cvudjchq0bi3a" path="res://Scene/ball.tscn" id="3_hqh4a"]
 [ext_resource type="Texture2D" uid="uid://bd7vg623ihx2o" path="res://Assets/wall-horizontal.png" id="4_2udgs"]
+[ext_resource type="Texture2D" uid="uid://cuqdufjslyind" path="res://Assets/wall-vertical.png" id="5_hy2lt"]
+[ext_resource type="Texture2D" uid="uid://ckrrhuvnv3bnu" path="res://Assets/middle-line.png" id="7_jnaux"]
+[ext_resource type="FontFile" uid="uid://d3ai40rlhrdq4" path="res://Assets/alarm clock.ttf" id="8_sf8vf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67nxj"]
-size = Vector2(1151, 20)
+size = Vector2(1096.88, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01fou"]
+size = Vector2(19, 548)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fck1w"]
+font = ExtResource("8_sf8vf")
+font_size = 60
 
 [node name="Pong" type="Node2D"]
+script = ExtResource("1_8a7os")
 
 [node name="Player" parent="." instance=ExtResource("1_lmtgw")]
 position = Vector2(111, 326)
@@ -22,12 +34,12 @@ position = Vector2(1045, 347)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="TopWall"]
-position = Vector2(576, 40)
-scale = Vector2(0.968013, 1)
+position = Vector2(575.5, 40)
+scale = Vector2(0.923401, 1)
 texture = ExtResource("4_2udgs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
-position = Vector2(576.5, 40)
+position = Vector2(575.375, 40)
 shape = SubResource("RectangleShape2D_67nxj")
 
 [node name="ButtonWall" type="StaticBody2D" parent="."]
@@ -35,14 +47,62 @@ position = Vector2(-1, 570)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ButtonWall"]
-position = Vector2(576, 40)
-scale = Vector2(0.968013, 1)
+position = Vector2(576.5, 40)
+scale = Vector2(0.923401, 1)
 texture = ExtResource("4_2udgs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonWall"]
-position = Vector2(576.5, 40)
+position = Vector2(576.562, 40)
 shape = SubResource("RectangleShape2D_67nxj")
 
 [node name="GoalLeft" type="Area2D" parent="."]
+position = Vector2(36, 328)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="GoalLeft"]
+position = Vector2(0.499999, -2.99998)
+scale = Vector2(0.95, 0.933544)
+texture = ExtResource("5_hy2lt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft"]
+position = Vector2(0.5, -3.5)
+shape = SubResource("RectangleShape2D_01fou")
+
+[node name="GoalRight" type="Area2D" parent="."]
+position = Vector2(1114, 329)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GoalRight"]
+position = Vector2(0.499999, -4.00003)
+scale = Vector2(0.95, 0.933544)
+texture = ExtResource("5_hy2lt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight"]
+position = Vector2(0.5, -4)
+shape = SubResource("RectangleShape2D_01fou")
+
+[node name="Middle-line" type="Sprite2D" parent="."]
+position = Vector2(577, 325)
+scale = Vector2(1, 0.96248)
+texture = ExtResource("7_jnaux")
+
+[node name="PlayerScore" type="Label" parent="."]
+offset_left = 498.0
+offset_top = 66.0
+offset_right = 538.0
+offset_bottom = 89.0
+text = "0"
+label_settings = SubResource("LabelSettings_fck1w")
+horizontal_alignment = 1
+
+[node name="ComputerScore" type="Label" parent="."]
+offset_left = 608.0
+offset_top = 67.0
+offset_right = 648.0
+offset_bottom = 131.0
+text = "0"
+label_settings = SubResource("LabelSettings_fck1w")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="GoalLeft" to="." method="_on_goal_left_body_entered"]
+[connection signal="body_entered" from="GoalRight" to="." method="_on_goal_right_body_entered"]

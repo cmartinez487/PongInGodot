@@ -3,6 +3,9 @@ extends CharacterBody2D
 var speed = 500
 
 func _ready() -> void:
+	setBallVelocity()
+	
+func setBallVelocity() -> void:
 	if randi() % 2 == 0:
 		velocity.x = 1
 	else:
